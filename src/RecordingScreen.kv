@@ -1,0 +1,26 @@
+<RecordingScreen>
+    GridLayout:
+        padding: 30
+        spacing: 20
+        cols: 1
+        Label:
+            text: 'Recording Menu'
+            size: self.texture_size
+            font_size: 30
+            #halign: 'middle'
+            #valign: 'middle'
+
+        BoxLayout:
+
+            spacing: 20
+
+            Button:
+                id: record_button
+                text: root.record_button_text
+                on_press: root.record_button_pressed()
+
+
+            Button:
+                id: from_old_record_to_menu_button
+                text: 'Back'
+                on_press: root.manager.current = 'menu'

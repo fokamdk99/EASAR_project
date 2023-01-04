@@ -1,0 +1,89 @@
+<AnalyzeScreen>
+    GridLayout:
+        cols: 1
+        Label:
+            text: 'ANALYZE MENU'
+            font_size: 30
+
+        GridLayout:
+            cols: 1
+            Label:
+                text: "Patterns"
+                font_size: 20
+
+        GridLayout:
+            cols:3
+            spacing: 5
+            padding: 5
+
+            Button:
+                text: "Select pattern"
+                on_release: root.show_pat_list(self)
+
+            Button:
+                text: "Open patterns directory"
+                on_press: root.analyzer_open_pat_dir()
+
+
+
+        GridLayout:
+
+            cols: 1
+            Label:
+                text: 'Recording'
+                font_size: 20
+
+        GridLayout:
+            cols: 1
+            spacing: 5
+            padding: 5
+            Button:
+                id: record_button
+                text: root.record_button_text
+                on_press: root.record_button_pressed()
+
+        GridLayout:
+            cols: 2
+            spacing: 5
+            padding: 5
+
+            Button:
+                text: "Select recording"
+                on_release: root.show_rec_list(self)
+
+            Button:
+                text: "Open recordings directory"
+                on_press: root.analyzer_open_rec_dir()
+
+
+        GridLayout:
+            cols: 1
+            Label:
+                text: 'ANALIZING'
+                font_size: 20
+        GridLayout:
+            spacing: 5
+            padding: 5
+            cols: 3
+
+            Button:
+
+                text: "Spectrogram of selected pattern"
+                on_press: root.spectrogram_pattern_button_pressed()
+            Button:
+                text: "Analyze"
+                on_press: root.analyze_button_pressed()
+
+            Button:
+                text: "Spectrogram of selected recording"
+                on_press: root.spectrogram_recording_button_pressed()
+
+        GridLayout:
+            cols: 1
+            spacing: 5
+            padding: 5
+            Button:
+                id: from_analyze_to_menu_button
+                text: "Back to Menu"
+                on_press: root.back_button_pressed()
+                on_press: root.manager.current = 'menu'

@@ -1,0 +1,46 @@
+<MenuScreen>
+
+
+    GridLayout:
+        cols: 1
+        #orientation: 'vertical'
+        padding: 20
+        spacing: 20
+
+        Label:
+            text: 'EASAR Project - Hey-Siri-ish App'
+            size: self.texture_size
+            font_size: 30
+            #halign: 'middle'
+            #valign: 'middle'
+
+        GridLayout:
+
+            cols: 3
+
+            spacing: 20
+
+            Button:
+                id: go_to_record
+                text: 'Recording Menu'
+                on_press: root.manager.current = 'record'
+                on_press: root.record_go_button_pressed()
+
+
+            Button:
+                id: go_to_analyze
+                text: 'Analyze'
+                on_press: root.manager.current = 'analyze'
+                on_press: root.analyze_go_button_pressed()
+
+
+
+
+        GridLayout:
+
+            cols:1
+
+            Button:
+                id: quit_button
+                text: 'Exit'
+                on_press: root.exit_button_pressed()
