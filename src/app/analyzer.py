@@ -1,4 +1,4 @@
-import detect_notes_commented as dnc
+import app.detect_notes_commented as dnc
 import librosa
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,6 +6,7 @@ from dtaidistance import dtw
 from dtaidistance import dtw_visualisation as dtwvis
 from scipy import signal
 from scipy.io import wavfile
+import os
 
 class Analyzer():
 
@@ -50,28 +51,28 @@ class Analyzer():
         return nov, fs_nov
 
     def analyze_stuff(self):
+        reference_recording_path = './Patterns/'
+        new_recording_path = './Recordings/'
         
-        template_path = './src/Patterns/'
-        query_path = './src/Recordings/'
-        #print(self.current_recording +" and "+self.current_pattern)
-        query, fs_query = librosa.load(query_path + self.current_recording)
-        template, fs_template = librosa.load(template_path + self.current_pattern)
+        reference_recording, reference_recording_fs = librosa.load(reference_recording_path + self.current_pattern)
+        new_recording, new_recording_fs = librosa.load(new_recording_path + self.current_recording)
+        if (len(new_recording) < len(reference_recording)):
+            raise ValueError('new recording cannot be shorter than reference recording')
 
-        query = np.array(query, dtype = np.double)
-        template = np.array(template, dtype = np.double)
+        reference_recording = np.array(reference_recording, dtype = np.double)
+        new_recording = np.array(new_recording, dtype = np.double)
 
-        number_of_samples_in_10ms = 0.01 * fs_template
+        window = len(reference_recording)
+        new_recording_length = len(new_recording)
+        step = int(new_recording_length / 10)
+        current_point = 0
         distance_list = []
-        step = number_of_samples_in_10ms/2
-        counter = 0
-        while (counter*step + number_of_samples_in_10ms < len(query)):
-            piss = template[counter*step:(counter*step + number_of_samples_in_10ms)]
-            distance_list.append(dtw.distance_fast(query, piss, use_pruning=True))
-        
-        # oblicz dystans, tyle ze dla malych kawalkow
-        print("wyniki\n")
-        [print(x) for x in distance_list]
-        print("koniec wynikow\n")
+        while(window + current_point*step <= new_recording_length):
+            left_threshold = current_point*step
+            right_threshold = window + left_threshold
+            new_recording_sample = new_recording[left_threshold:right_threshold]
+            distance_list.append(dtw.distance_fast(reference_recording, new_recording_sample, use_pruning=True))
+        asd = 345
 
     def compute_spectrogram(self, audio_data):
         sample_rate, samples = wavfile.read(audio_data)

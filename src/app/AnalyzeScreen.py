@@ -1,5 +1,5 @@
-from recorder import Recorder
-from analyzer import Analyzer
+from app.recorder import Recorder
+from app.analyzer import Analyzer
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.dropdown import DropDown
@@ -109,7 +109,7 @@ class AnalyzeScreen(Screen):
         patterns_dropdown = DropDown()
         listdir = os.listdir()
         [print(x) for x in listdir]
-        patterns = os.listdir("./src/Patterns")
+        patterns = os.listdir("./Patterns")
         
         for pat in patterns:
             new_pattern_button = Button(text=pat, size_hint_y=None, height=44)
@@ -123,7 +123,7 @@ class AnalyzeScreen(Screen):
 
         recordings_dropdown = DropDown()
 
-        recordings = os.listdir("./src/Recordings")
+        recordings = os.listdir("./Recordings")
         for rec in recordings:
             new_recording_button = Button(text=rec, size_hint_y=None, height=44)
             new_recording_button.bind(on_release=lambda btn: recordings_dropdown.select(btn.text))

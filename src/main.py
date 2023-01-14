@@ -4,14 +4,16 @@ from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 
-from AnalyzeScreen import AnalyzeScreen
+from app.AnalyzeScreen import AnalyzeScreen
 
-from analyzer import Analyzer
-from recorder import Recorder
+from app.analyzer import Analyzer
+from app.recorder import Recorder
+import os
 
-Builder.load_file('MenuScreen.kv')
-Builder.load_file('RecordingScreen.kv')
-Builder.load_file('AnalyzeScreen.kv')
+print(os.listdir())
+Builder.load_file('./app/MenuScreen.kv')
+Builder.load_file('./app/RecordingScreen.kv')
+Builder.load_file('./app/AnalyzeScreen.kv')
 
 class RecordingScreen(Screen):
     record_button_text = StringProperty()
