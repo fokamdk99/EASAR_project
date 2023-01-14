@@ -107,7 +107,10 @@ class AnalyzeScreen(Screen):
     def show_pat_list(self, button):
 
         patterns_dropdown = DropDown()
-        patterns = os.listdir("Patterns")
+        listdir = os.listdir()
+        [print(x) for x in listdir]
+        patterns = os.listdir("./src/Patterns")
+        
         for pat in patterns:
             new_pattern_button = Button(text=pat, size_hint_y=None, height=44)
             new_pattern_button.bind(on_release=lambda btn:  patterns_dropdown.select(btn.text))
@@ -120,7 +123,7 @@ class AnalyzeScreen(Screen):
 
         recordings_dropdown = DropDown()
 
-        recordings = os.listdir("Recordings")
+        recordings = os.listdir("./src/Recordings")
         for rec in recordings:
             new_recording_button = Button(text=rec, size_hint_y=None, height=44)
             new_recording_button.bind(on_release=lambda btn: recordings_dropdown.select(btn.text))

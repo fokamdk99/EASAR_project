@@ -51,8 +51,8 @@ class Analyzer():
 
     def analyze_stuff(self):
         
-        template_path = './Patterns/'
-        query_path = './Recordings/'
+        template_path = './src/Patterns/'
+        query_path = './src/Recordings/'
         #print(self.current_recording +" and "+self.current_pattern)
         query, fs_query = librosa.load(query_path + self.current_recording)
         template, fs_template = librosa.load(template_path + self.current_pattern)
