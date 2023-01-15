@@ -31,14 +31,23 @@ for df in dfs:
     tmp3 = df[2:][0]
     data[tmp1, tmp2] = tmp3
 
+save_path = './calculation_results/graphs/dtw/'
+
 for index, column in enumerate(data.columns):
-    x_axis = (data.iloc[:,index].index.values - 2) * 30
+    x_axis = (data.iloc[:,index].index.values) * 30
     y_axis = [float(x) for x in data.iloc[:,index].values]
+    xmin = x_axis[np.nanargmin(y_axis)]
+    ymin = np.nanmin(y_axis)
     plt.clf()
     plt.xlabel('time [ms]')
     plt.ylabel('distance')
+    text= "x={:.3f}, y={:.3f}".format(xmin, ymin)
+    bbox_props = dict(boxstyle="square,pad=0.3", fc="w", ec="k", lw=0.72)
+    arrowprops=dict(arrowstyle="->",connectionstyle="angle,angleA=0,angleB=60")
+    kw = dict(xycoords='data',textcoords="axes fraction",
+              arrowprops=arrowprops, bbox=bbox_props, ha="right", va="top")
+    plt.annotate(text, xy=(xmin, ymin), xytext=(0.94,0.96), **kw)
     plt.plot(x_axis, y_axis)
-    save_path = './calculation_results/graphs/dtw/'
     plt.savefig(f'{save_path}-{data.columns[index][0]}-{data.columns[index][1]}.png')
 
 data.to_csv(save_path + 'table.csv', sep=';')
