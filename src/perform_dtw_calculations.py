@@ -8,7 +8,7 @@ def perform_dtw_analysis():
     list_tuple = list(itertools.product(recordings, patterns))
     analyzer = Analyzer()
     
-    for item in list_tuple[0:2]:
+    for item in list_tuple:
         analyzer.current_recording = item[0]
         analyzer.current_pattern = item[1]
         analyzer.analyze_dtw()
