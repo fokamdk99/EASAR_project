@@ -4,7 +4,7 @@ from dtaidistance import dtw
 from dtaidistance import dtw_visualisation as dtwvis
 import os
 
-def analyze_stuff():
+def test_analyze_stuff():
         
         template_path = './src/Patterns/'
         query_path = './src/Recordings/'
@@ -29,4 +29,4 @@ def analyze_stuff():
         [print(x) for x in distance_list]
         print("koniec wynikow\n")
 
-analyze_stuff()
+test_analyze_stuff()

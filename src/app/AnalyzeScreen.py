@@ -82,7 +82,7 @@ class AnalyzeScreen(Screen):
 
             else:
                 print("Chosen pattern " + str(self.an.current_pattern))
-                self.an.analyze_stuff()
+                self.an.analyze_dtw()
 
 
     def analyzer_open_rec_list_screen_button_pressed(self):
